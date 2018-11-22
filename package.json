@@ -25,9 +25,6 @@
     "extends": "react-app"
   },
 
-  "proxy": "https://guarded-depths-49314.herokuapp.com",
-
-
   "browserslist": [
     ">0.2%",
     "not dead",
