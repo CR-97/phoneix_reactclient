@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const register = newUser => {
     return axios
-        .post('/register', {
+        .post('https://guarded-depths-49314.herokuapp.com/register', {
             first_name: newUser.first_name,
             last_name: newUser.last_name,
             email: newUser.email,
@@ -15,7 +15,7 @@ export const register = newUser => {
 
 export const login = user => {
     return axios
-        .post('/login', {
+        .post('https://guarded-depths-49314.herokuapp.com/login', {
             email: user.email,
             password: user.password
         })
