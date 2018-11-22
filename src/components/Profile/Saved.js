@@ -43,7 +43,7 @@ export default class Saved extends Component{
 
   getsavedTeam = () =>{
     axios
-    .get("http://localhost:5000/getSaveTeams") 
+    .get("https://guarded-depths-49314.herokuapp.com/getSaveTeams") 
       .then(response =>{
         this.setState({
           team:response.data
@@ -56,7 +56,7 @@ export default class Saved extends Component{
   
   getsaved =() =>{
     axios
-    .get("http://localhost:5000/getSaveNews") 
+    .get("https://guarded-depths-49314.herokuapp.com/getSaveNews") 
       .then(response =>{
         this.setState({
           saved:response.data
@@ -70,7 +70,7 @@ export default class Saved extends Component{
   handleDelete(title){
      
     console.log("title =",title);
-    axios.post("http://localhost:5000/getSaveNews/delete", title)
+    axios.post("https://guarded-depths-49314.herokuapp.com/getSaveNews/delete", title)
     .then(res =>{
       alert("Item Deleted");
     })
@@ -81,7 +81,7 @@ export default class Saved extends Component{
 
   handleDislike(name){
       console.log(name);
-      axios.post("http://localhost:5000/getSaveTeams/delete", name)
+      axios.post("https://guarded-depths-49314.herokuapp.com/getSaveTeams/delete", name)
       .then(res =>{
         alert("Item Deleted");
       })

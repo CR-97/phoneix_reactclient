@@ -23,17 +23,12 @@ class Landing extends Component {
     }
 
     render () {
-
-    const userLink = (
-        <div className="col-sm-8 mx-auto">
-            <h1 className="text-center">Welcome Back {this.state.first_name} {this.state.last_name}</h1>
-        </div>
-     )
-
         return (
             <div className="container">
                 <div className="jumbotron mt-5">
-                {userLink}
+                    <div className="col-sm-8 mx-auto">
+                         <h1 className="text-center">Welcome Back {this.state.first_name} {this.state.last_name}</h1>
+                    </div>
                 </div>
             </div>
         )

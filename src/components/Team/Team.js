@@ -35,7 +35,7 @@ export default class Team extends Component{
 
   getUefa = () =>{
     axios
-    .get("/getTeam/2001") 
+    .get("https://guarded-depths-49314.herokuapp.com/getTeam/2001") 
       .then(response =>{
         this.setState({
          uefa:response.data
@@ -48,7 +48,7 @@ export default class Team extends Component{
 
   getBunde = () =>{
     axios
-    .get("/getTeam/2002") 
+    .get("https://guarded-depths-49314.herokuapp.com/getTeam/2002") 
       .then(response =>{
         this.setState({
          bunde:response.data
@@ -61,7 +61,7 @@ export default class Team extends Component{
 
   getLiga = () =>{
     axios
-    .get("/getTeam/2014") 
+    .get("https://guarded-depths-49314.herokuapp.com/getTeam/2014") 
       .then(response =>{
         this.setState({
          laliga:response.data
@@ -74,7 +74,7 @@ export default class Team extends Component{
 
   getLigue = () =>{
     axios
-    .get("/getTeam/2015") 
+    .get("https://guarded-depths-49314.herokuapp.com/getTeam/2015") 
       .then(response =>{
         this.setState({
          ligue1:response.data
@@ -87,7 +87,7 @@ export default class Team extends Component{
 
   getSeries = () =>{
     axios
-    .get("/getTeam/2019") 
+    .get("https://guarded-depths-49314.herokuapp.com/getTeam/2019") 
       .then(response =>{
         this.setState({
          seriesA:response.data
@@ -100,7 +100,7 @@ export default class Team extends Component{
 
   getPremier = () =>{
     axios
-    .get("/getTeam/2021") 
+    .get("https://guarded-depths-49314.herokuapp.com/getTeam/2021") 
       .then(response =>{
         this.setState({
          premier:response.data
@@ -113,7 +113,7 @@ export default class Team extends Component{
 
   handleLike =(likeData)=>{
     console.log(likeData);
-      axios.post("/getSaveTeams/add", likeData)
+      axios.post("https://guarded-depths-49314.herokuapp.com/getSaveTeams/add", likeData)
       .then(res =>{
         alert("Saved");
       })

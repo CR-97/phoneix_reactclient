@@ -41,7 +41,7 @@ export default class Search extends Component{
     e.preventDefault();
     this.setState({ alertVisible: false });
 
-    const query = `/getSearch?q=${this.state.title}`;
+    const query = `https://guarded-depths-49314.herokuapp.com/getSearch?q=${this.state.title}`;
 
     console.log(query);
 

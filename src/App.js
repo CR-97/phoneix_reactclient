@@ -53,7 +53,7 @@ class App extends Component {
   /*----------End of API GET Call-------------*/
   getNews1 =() =>{
     axios
-    .get("/getNews1") 
+    .get("https://guarded-depths-49314.herokuapp.com/getNews1") 
       .then(response =>{
         this.setState({
           news1:response.data.articles
@@ -66,7 +66,7 @@ class App extends Component {
 
   getNews2 =() =>{
     axios
-    .get("/getNews2") 
+    .get("https://guarded-depths-49314.herokuapp.com/getNews2") 
       .then(response =>{
         this.setState({
           news2:response.data.articles
@@ -79,7 +79,7 @@ class App extends Component {
 
   getNews3 =() =>{
     axios
-    .get("/getNews3") 
+    .get("https://guarded-depths-49314.herokuapp.com/getNews3") 
       .then(response =>{
         this.setState({
           news3:response.data.articles
@@ -92,7 +92,7 @@ class App extends Component {
 
   getMatches =() =>{
     axios
-      .get("/getMatches") 
+      .get("https://guarded-depths-49314.herokuapp.com/getMatches") 
         .then(response =>{
           this.setState({
             matches:response.data.matches
@@ -107,7 +107,7 @@ class App extends Component {
   getComp =() =>{
     axios
       .get
-      ('/getComp') 
+      ('https://guarded-depths-49314.herokuapp.com/getComp') 
       .then(response =>{
         this.setState({
           comp:response.data
@@ -121,7 +121,7 @@ class App extends Component {
  
     handleSubmit(newsData){
       console.log(newsData);
-      axios.post("/getSaveNews/add", newsData)
+      axios.post("https://guarded-depths-49314.herokuapp.com/getSaveNews/add", newsData)
       .then(res =>{
         alert("Saved");
       })

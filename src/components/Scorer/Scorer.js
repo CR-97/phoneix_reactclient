@@ -46,7 +46,7 @@ export default class Scorer extends Component {
 
   getUefa = () =>{
     axios
-    .get("/getScorer/2001") 
+    .get("https://guarded-depths-49314.herokuapp.com/getScorer/2001") 
       .then(response =>{
         this.setState({
          uefa:response.data
@@ -59,7 +59,7 @@ export default class Scorer extends Component {
 
   getBunde = () =>{
     axios
-    .get("/getScorer/2002") 
+    .get("https://guarded-depths-49314.herokuapp.com/getScorer/2002") 
       .then(response =>{
         this.setState({
          bunde:response.data
@@ -72,7 +72,7 @@ export default class Scorer extends Component {
 
   getLiga = () =>{
     axios
-    .get("/getScorer/2014") 
+    .get("https://guarded-depths-49314.herokuapp.com/getScorer/2014") 
       .then(response =>{
         this.setState({
          liga:response.data
@@ -85,7 +85,7 @@ export default class Scorer extends Component {
 
   getLigue = () =>{
     axios
-    .get("/getScorer/2015") 
+    .get("https://guarded-depths-49314.herokuapp.com/getScorer/2015") 
       .then(response =>{
         this.setState({
          ligue1:response.data
@@ -98,7 +98,7 @@ export default class Scorer extends Component {
 
   getSeries = () =>{
     axios
-    .get("/getScorer/2019") 
+    .get("https://guarded-depths-49314.herokuapp.com/getScorer/2019") 
       .then(response =>{
         this.setState({
          seriesA:response.data
@@ -111,7 +111,7 @@ export default class Scorer extends Component {
 
   getPremier = () =>{
     axios
-    .get("/getScorer/2021") 
+    .get("https://guarded-depths-49314.herokuapp.com/getScorer/2021") 
       .then(response =>{
         this.setState({
          premier:response.data

@@ -3,7 +3,7 @@ import { Col, Container, Row, Footer } from "mdbreact";
 
 import axios from 'axios';
 
-const url = '/getComp';
+const url = 'https://guarded-depths-49314.herokuapp.com/getComp';
 
 class FooterPagePro extends Component {
 
