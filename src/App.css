@@ -1,0 +1,107 @@
+#page{
+  background-color: rgb(233, 231, 231);
+}
+
+#navbar{
+  background-color:  rgb(69, 82, 110) ;
+  color: white;
+}
+
+#navitem{
+  font-size: 17px;
+  color: white;
+}
+
+#navtitle{
+  font-size: 30px;
+  color:white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#team-size{
+  height:400px;
+}
+
+#img-size{
+  height: 100px;
+  width: 200px;
+  margin-top: 10px;
+  margin-left: 30px;
+}
+
+#size{
+  height: 800px;
+  border-color: rgb(69, 82, 110);
+}
+#save-size{
+  height: 600px;
+  border-color:  rgb(69, 82, 110);
+}
+
+#logo{
+  height:75px;
+  width: 90px;
+  margin-right:7px;
+  border-radius: 38px;
+  border-color: black;
+
+}
+
+#score-size{
+  margin-top: 5px;
+  font-size: 16px;
+  color: darkgrey;
+}
+
+#score-text{
+  margin-top: 10px;
+  font-size: 20px;
+}
+
+#score-title{
+  font-size: 25px;
+  font-style: italic;
+}
+
+#subtitle{
+  margin-top: 20px;
+  margin-bottom: 20px
+}
+
+#read-more{
+  margin-top: 25px;
+}
+
+#btn-prime { background: rgb(197, 20, 20) !important; }
+
+#btn-save { background: rgb(19, 185, 149) !important; }
+
+#btn-star { 
+  background: rgba(243, 247, 48, 0.986) !important; 
+  padding: 15px;
+  margin-left: 75px;
+}
+
+#btn-del { 
+  background: rgb(197, 20, 20) !important; 
+  padding: 15px;
+  margin-left: 75px;
+}
+
+.btn-circle.btn-lg {
+  width: 50px;
+  height: 50px;
+  padding: 14px 16px;
+  font-size: 18px;
+  line-height: 1.33;
+  border-radius: 25px;
+}
+
+.btn-circle.btn-xl {
+  width: 70px;
+  height: 70px;
+  padding: 10px 16px;
+  font-size: 24px;
+  line-height: 1.33;
+  border-radius: 35px;
+}
