@@ -63,8 +63,8 @@ class Register extends Component {
                                 <label htmlFor="last_name">Last Name</label>
                                 <input type="text"
                                     className="form-control"
-                                    name="first_name"
-                                    id="first_name"
+                                    name="last_name"
+                                    id="last_name"
                                     placeholder="Enter Last Name"
                                     value={this.state.last_name}
                                     onChange={this.onChange} />
