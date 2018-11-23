@@ -29,3 +29,17 @@ export const login = user => {
         })
 }
 
+export const getProfile = token => {
+    return axios
+      .get('https://guarded-depths-49314.herokuapp.com/profile', {
+        headers: { Authorization: ` ${token}` }
+      })
+      .then(response => {
+        console.log(response)
+        return response.data
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+
