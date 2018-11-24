@@ -31,6 +31,8 @@ export default class Saved extends Component{
     this.getsavedTeam();
     const token = localStorage.usertoken
     getProfile(token).then(res => {
+      console.log("token" ,token)
+      console.log(res)
       this.setState({
         first_name: res.first_name,
         last_name: res.last_name,
