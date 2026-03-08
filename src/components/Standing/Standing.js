@@ -1,333 +1,86 @@
-import React, {Component} from 'react';
-import { TabContent, TabPane, Nav, NavItem, NavLink,Container, Table} from 'reactstrap';
+import React, { useState, useEffect } from 'react';
+import { TabContent, TabPane, Nav, NavItem, NavLink, Container, Table } from 'reactstrap';
 import classnames from 'classnames';
-
+import axios from 'axios';
 import S1 from './StandingT1';
 import S2 from './StandingT2';
 import S3 from './StandingT3';
 import S4 from './StandingT4';
 import S5 from './StandingT5';
 
+const API = 'https://guarded-depths-49314.herokuapp.com';
 
-import axios from 'axios';
+const TABS = [
+  { id: '1', label: 'BundesLiga', key: 'bunde', code: 2002, Component: S1 },
+  { id: '2', label: 'LaLiga', key: 'liga', code: 2014, Component: S2 },
+  { id: '3', label: 'Ligue 1', key: 'ligue1', code: 2015, Component: S3 },
+  { id: '4', label: 'Premier League', key: 'premier', code: 2021, Component: S4 },
+  { id: '5', label: 'Serie A', key: 'seriesA', code: 2019, Component: S5 },
+];
 
-export default class Standing extends Component {
-  constructor(props) {
-    super(props);
+function Standing() {
+  const [activeTab, setActiveTab] = useState('1');
+  const [data, setData] = useState({ bunde: [], liga: [], ligue1: [], premier: [], seriesA: [] });
 
-    this.toggle = this.toggle.bind(this);
-    this.state = {
-      activeTab: '1',
-      premier: [],
-      ligue1: [],
-      bunde: [],
-      seriesA: [],
-      liga: []
-    };
-  }
-
-  toggle(tab) {
-    if (this.state.activeTab !== tab) {
-      this.setState({
-        activeTab: tab
-      });
-    }
-  }
-
-  componentDidMount(){
-    this.getBunde();
-    this.getLiga();
-    this.getPremier();
-    this.getSeries();
-    this.getLigue();
-  }
-
-  componentDidUpdate(){
-     this.getBunde();
-     this.getLiga();
-     this.getPremier();
-     this.getSeries();
-     this.getLigue();
-  }
-
-  getBunde = () =>{
-    axios
-    .get("https://guarded-depths-49314.herokuapp.com/getStanding/2002") 
-      .then(response =>{
-        this.setState({
-         bunde:response.data
-        });
-      })
-      .catch(error => {
-        //alert(error);
-      });
-  }
-
-  getLiga = () =>{
-    axios
-    .get("https://guarded-depths-49314.herokuapp.com/getStanding/2014") 
-      .then(response =>{
-        this.setState({
-         liga:response.data
-        });
-      })
-      .catch(error => {
-        //alert(error);
-      });
-  }
-
-  getLigue = () =>{
-    axios
-    .get("https://guarded-depths-49314.herokuapp.com/getStanding/2015") 
-      .then(response =>{
-        this.setState({
-         ligue1:response.data
-        });
-      })
-      .catch(error => {
-        //alert(error);
-      });
-  }
-
-  getSeries = () =>{
-    axios
-    .get("https://guarded-depths-49314.herokuapp.com/getStanding/2019") 
-      .then(response =>{
-        this.setState({
-         seriesA:response.data
-        });
-      })
-      .catch(error => {
-        //alert(error);
-      });
-  }
-
-  getPremier = () =>{
-    axios
-    .get("https://guarded-depths-49314.herokuapp.com/getStanding/2021") 
-      .then(response =>{
-        this.setState({
-         premier:response.data
-        });
-      })
-      .catch(error => {
-        //alert(error);
-      });
-  }
-
-  
-  render() {
-    const bunde = this.state.bunde.map((item)=>{
-      return(
-        <S1 item={item}/>
-      );
+  useEffect(() => {
+    TABS.forEach(tab => {
+      axios
+        .get(`${API}/getStanding/${tab.code}`)
+        .then(r => setData(prev => ({ ...prev, [tab.key]: r.data })))
+        .catch(() => {});
     });
+  }, []);
 
-    const lg = this.state.liga.map((item)=>{
-      return(
-        <S2 item={item}/>
-      );
-    });
-    const ligue = this.state.ligue1.map((item)=>{
-      return(
-        <S3 item={item}/>
-      );
-    });
-    const pl = this.state.premier.map((item)=>{
-      return(
-        <S4 item={item}/>
-      );
-    });
-    const series = this.state.seriesA.map((item)=>{
-      return(
-        <S5 item={item}/>
-      );
-    });
+  const tableHead = (
+    <thead>
+      <tr>
+        <td>Pos</td>
+        <th>Team</th><th>MP</th><th>W</th><th>D</th><th>L</th>
+        <th>GF</th><th>GA</th><th>GD</th><th>Pts</th>
+      </tr>
+    </thead>
+  );
 
-    return (
-      <div>
-        <Container>
-          <h1 className="page-title">Standings</h1>
-        </Container>
-        <Container>
+  return (
+    <div>
+      <Container>
+        <h1 className="page-title">Standings</h1>
+      </Container>
+      <Container>
         <Nav tabs>
-          <NavItem>
-            <NavLink
-              className={classnames({ active: this.state.activeTab === '1' })}
-              onClick={() => { this.toggle('1'); }}
-              style={{cursor:'pointer'}}
-            >
-              BundesLiga
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink
-              className={classnames({ active: this.state.activeTab === '2' })}
-              onClick={() => { this.toggle('2'); }}
-              style={{cursor:'pointer'}}
-            >
-              LaLiga
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink
-              className={classnames({ active: this.state.activeTab === '3' })}
-              onClick={() => { this.toggle('3'); }}
-              style={{cursor:'pointer'}}
-            >
-              Ligue 1
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink
-              className={classnames({ active: this.state.activeTab === '4' })}
-              onClick={() => { this.toggle('4'); }}
-              style={{cursor:'pointer'}}
-            >
-              Premier League
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink
-              className={classnames({ active: this.state.activeTab === '5' })}
-              onClick={() => { this.toggle('5'); }}
-              style={{cursor:'pointer'}}
-            >
-              Serie A
-            </NavLink>
-          </NavItem>
-         
+          {TABS.map(tab => (
+            <NavItem key={tab.id}>
+              <NavLink
+                className={classnames({ active: activeTab === tab.id })}
+                onClick={() => setActiveTab(tab.id)}
+                style={{ cursor: 'pointer' }}
+              >
+                {tab.label}
+              </NavLink>
+            </NavItem>
+          ))}
         </Nav>
-        <br/>
-
-        {/* Content */}
-
-        <TabContent activeTab={this.state.activeTab}>
-          <TabPane tabId="1">
-            <Container>
-            <Table className="standing-table" bordered hover responsive>
-              <thead>
-              <tr>
-                <td>Pos</td>
-                <th>Team</th>
-                <th>MP</th>
-                <th>W</th>
-                <th>D</th>
-                <th>L</th>
-                <th>GF</th>
-                <th>GA</th>
-                <th>GD</th>
-                <th>Pts</th>
-             </tr>
-            </thead>
-          <tbody>
-            {bunde}
-          </tbody>
-            </Table>
-            </Container>
-          </TabPane>
-
-          <TabPane tabId="2">
-          <Container>
-            <Table className="standing-table" bordered hover responsive>
-              <thead>
-              <tr>
-                <td>Pos</td>
-                <th>Team</th>
-                <th>MP</th>
-                <th>W</th>
-                <th>D</th>
-                <th>L</th>
-                <th>GF</th>
-                <th>GA</th>
-                <th>GD</th>
-                <th>Pts</th>
-             </tr>
-            </thead>
-          <tbody>
-            {lg}
-          </tbody>
-            </Table>
-            </Container>
-          </TabPane>
-
-          <TabPane tabId="3">
-          <Container>
-            <Table className="standing-table" bordered hover responsive>
-              <thead>
-              <tr>
-                <td>Pos</td>
-                <th>Team</th>
-                <th>MP</th>
-                <th>W</th>
-                <th>D</th>
-                <th>L</th>
-                <th>GF</th>
-                <th>GA</th>
-                <th>GD</th>
-                <th>Pts</th>
-             </tr>
-            </thead>
-          <tbody>
-            {ligue}
-          </tbody>
-            </Table>
-              
-            </Container>
-          </TabPane>
-
-          <TabPane tabId="4">
-          <Container>
-            <Table className="standing-table" bordered hover responsive>
-              <thead>
-              <tr>
-                <td>Pos</td>
-                <th>Team</th>
-                <th>MP</th>
-                <th>W</th>
-                <th>D</th>
-                <th>L</th>
-                <th>GF</th>
-                <th>GA</th>
-                <th>GD</th>
-                <th>Pts</th>
-             </tr>
-            </thead>
-          <tbody>
-            {pl}
-          </tbody>
-            </Table>
-              
-            </Container>
-          </TabPane>
-
-          <TabPane tabId="5">
-          <Container>
-            <Table className="standing-table" bordered hover responsive>
-              <thead>
-              <tr>
-                <td>Pos</td>
-                <th>Team</th>
-                <th>MP</th>
-                <th>W</th>
-                <th>D</th>
-                <th>L</th>
-                <th>GF</th>
-                <th>GA</th>
-                <th>GD</th>
-                <th>Pts</th>
-             </tr>
-            </thead>
-          <tbody>
-            {series}
-          </tbody>
-            </Table>
-            </Container>
-          </TabPane>
+        <br />
+        <TabContent activeTab={activeTab}>
+          {TABS.map(tab => (
+            <TabPane key={tab.id} tabId={tab.id}>
+              <Container>
+                <Table className="standing-table" bordered hover responsive>
+                  {tableHead}
+                  <tbody>
+                    {data[tab.key].map((item, i) => (
+                      <tab.Component key={i} item={item} />
+                    ))}
+                  </tbody>
+                </Table>
+              </Container>
+            </TabPane>
+          ))}
         </TabContent>
-        </Container>
-        <br/><br/>
-      </div>
-    );
-  }
+      </Container>
+      <br /><br />
+    </div>
+  );
 }
+
+export default Standing;

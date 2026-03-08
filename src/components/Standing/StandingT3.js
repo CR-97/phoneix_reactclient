@@ -1,21 +1,20 @@
-import React, {Component} from 'react';
+import React from 'react';
 
-const Standing3 = props =>{
-  //console.log(scorer);
+function StandingT3({ item }) {
   return (
     <tr>
-    <td>{props.item.position}</td>     
-    <td>{props.item.team.name}</td>
-    <td>{props.item.playedGames}</td>
-    <td>{props.item.won}</td>
-    <td>{props.item.draw}</td>
-    <td>{props.item.lost}</td>
-    <td>{props.item.goalsFor}</td>
-    <td>{props.item.goalsAgainst}</td>
-    <td>{props.item.goalDifference}</td>
-    <td>{props.item.points}</td>
-  </tr>
+      <td>{item.position}</td>
+      <td>{item.team.name}</td>
+      <td>{item.playedGames}</td>
+      <td>{item.won}</td>
+      <td>{item.draw}</td>
+      <td>{item.lost}</td>
+      <td>{item.goalsFor}</td>
+      <td>{item.goalsAgainst}</td>
+      <td>{item.goalDifference}</td>
+      <td>{item.points}</td>
+    </tr>
   );
+}
 
-};
-export default Standing3;
+export default StandingT3;

@@ -1,128 +1,73 @@
-import React, { Component } from 'react';
-import { Col, Container, Row, Footer } from "mdbreact";
-
+import React, { useState, useEffect } from 'react';
+import { Col, Container, Row } from 'reactstrap';
+import { Link } from 'react-router-dom';
+import { FaFacebook, FaTwitter, FaGoogle, FaInstagram, FaHome, FaEnvelope, FaPhone } from 'react-icons/fa';
 import axios from 'axios';
 
 const url = 'https://guarded-depths-49314.herokuapp.com/getComp';
 
-class FooterPagePro extends Component {
+function FooterPagePro() {
+  const [competitions, setCompetitions] = useState([]);
 
-  constructor(){
-    super();
-    this.state ={
-      main:[]
-    };
-  }
-
-  componentDidMount() {
+  useEffect(() => {
     axios
-    .get(url) 
-      .then(response =>{
-        this.setState({
-          main:response.data
-        });
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }
+      .get(url)
+      .then(response => setCompetitions(response.data))
+      .catch(err => console.log(err));
+  }, []);
 
-  render() {
-    const comp = this.state.main.map(item =>{
-      return(
-        <p>{item.comp_name} ({item.comp_area})</p>
-      );
-    });
-
-    return (
-      <Footer color="mdb-color" className="font-small pt-4 mt-4">
-        <Container className="text-center text-md-left">
-          <Row className="text-center text-md-left mt-3 pb-3">
-            <Col md="2" lg="3" xl="3" className="mx-auto mt-3">
-              <h6 className="text-uppercase mb-4 font-weight-bold">
-                Links
-              </h6>
-              <p>
-                <a href="/">Home</a>
+  return (
+    <footer style={{ background: 'linear-gradient(135deg, rgb(33,43,65) 0%, rgb(44,56,85) 100%)', color: '#ccc' }} className="font-small pt-4 mt-4">
+      <Container className="text-center text-md-start">
+        <Row className="text-center text-md-start mt-3 pb-3">
+          <Col md="3" className="mx-auto mt-3">
+            <h6 className="text-uppercase mb-4 fw-bold text-white">Links</h6>
+            <p><Link to="/" className="text-secondary text-decoration-none">Home</Link></p>
+            <p><Link to="/team" className="text-secondary text-decoration-none">Teams</Link></p>
+            <p><Link to="/standings" className="text-secondary text-decoration-none">Standing</Link></p>
+            <p><Link to="/scorer" className="text-secondary text-decoration-none">Top Scorer</Link></p>
+            <p><Link to="/matches" className="text-secondary text-decoration-none">Matches</Link></p>
+            <p><Link to="/profile" className="text-secondary text-decoration-none">Profile</Link></p>
+          </Col>
+          <hr className="w-100 clearfix d-md-none" />
+          <Col md="3" className="mx-auto mt-3">
+            <h6 className="text-uppercase mb-4 fw-bold text-white">Leagues Available</h6>
+            {competitions.map((item, idx) => (
+              <p key={idx} style={{ fontSize: '0.85rem' }}>
+                {item.comp_name} ({item.comp_area})
               </p>
-              <p>
-                <a href="/team">Teams</a>
-              </p>
-              <p>
-                <a href="/standings">Standing</a>
-              </p>
-              <p>
-                <a href="/scorer">Top Scorer</a>
-              </p>
-              <p>
-                <a href="/matches">Matches</a>
-              </p>
-              <p>
-                <a href="/profile">Profile</a>
-              </p>
-            </Col>
-            <hr className="w-100 clearfix d-md-none" />
-            <Col md="6" lg="2" xl="2" className="mx-auto mt-3">
-              <h6 className="text-uppercase mb-4 font-weight-bold">League Available</h6>
-              <p>
-                {comp}
-              </p>
-            </Col>
-            <hr className="w-100 clearfix d-md-none" />
-            <Col md="4" lg="2" xl="2" className="mx-auto mt-3">
-              <h6 className="text-uppercase mb-4 font-weight-bold">
-                Links
-              </h6> 
-              <p>
-                <i className="fa fa-home mr-3" />Z-1, Lebuh Bukit Jambul, Bukit Jambul, 11900 Bayan Lepas, Pulau Pinang.
-              </p>
-              <p>
-                <i className="fa fa-envelope mr-3" />https://newinti.edu.my
-              </p>
-              <p>
-                <i className="fa fa-phone mr-3" /> +6 04-631 0138
-              </p>
-            </Col>
-            <hr className="w-100 clearfix d-md-none" />
-          </Row>
-          <hr />
-          <Row className="d-flex align-items-center">
-            <Col md="8" lg="8">
-              <p className="text-center text-md-left grey-text">
-                &copy; {new Date().getFullYear()} Copyright:{" "}
-                <a href="/"> phoneixfootball.com Created By: Richard Chuah</a>
-              </p>
-            </Col>
-            <Col md="4" lg="4" className="ml-lg-0">
-              <div className="text-center text-md-right">
-                <ul className="list-unstyled list-inline">
-                  <li className="list-inline-item">
-                    <a className="btn-floating btn-sm rgba-white-slight mx-1" href="https://www.facebook.com/BleacherReportFootball/" target="_blank">
-                      <i className="fa fa-facebook" />
-                    </a>
-                  </li>
-                  <li className="list-inline-item">
-                    <a className="btn-floating btn-sm rgba-white-slight mx-1" href="https://twitter.com/brfootball" target="_blank">
-                      <i className="fa fa-twitter" />
-                    </a>
-                  </li>
-                  <li className="list-inline-item">
-                    <a className="btn-floating btn-sm rgba-white-slight mx-1" href="https://plus.google.com/discover/wz4saB" target="_blank">
-                      <i className="fa fa-google-plus" />
-                    </a>
-                  </li>
-                  <li className="list-inline-item">
-                    <a className="btn-floating btn-sm rgba-white-slight mx-1" href="https://www.instagram.com/bleacherreport/?hl=en" target="_blank">
-                      <i className="fa fa-instagram" />
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </Col>
-          </Row>
-        </Container>
-      </Footer>
-    );
-  }
+            ))}
+          </Col>
+          <hr className="w-100 clearfix d-md-none" />
+          <Col md="3" className="mx-auto mt-3">
+            <h6 className="text-uppercase mb-4 fw-bold text-white">Contact</h6>
+            <p><FaHome className="me-2" />Z-1, Lebuh Bukit Jambul, 11900 Bayan Lepas, Pulau Pinang.</p>
+            <p><FaEnvelope className="me-2" />https://newinti.edu.my</p>
+            <p><FaPhone className="me-2" />+6 04-631 0138</p>
+          </Col>
+        </Row>
+        <hr style={{ borderColor: 'rgba(255,255,255,0.15)' }} />
+        <Row className="d-flex align-items-center pb-3">
+          <Col md="8">
+            <p className="text-center text-md-start" style={{ color: '#aaa', fontSize: '0.85rem' }}>
+              &copy; {new Date().getFullYear()} Copyright:{' '}
+              <Link to="/" className="text-secondary text-decoration-none">
+                phoneixfootball.com – Created By: Richard Chuah
+              </Link>
+            </p>
+          </Col>
+          <Col md="4">
+            <div className="text-center text-md-end">
+              <a className="me-2 text-secondary" href="https://www.facebook.com/BleacherReportFootball/" target="_blank" rel="noopener noreferrer"><FaFacebook size={18} /></a>
+              <a className="me-2 text-secondary" href="https://twitter.com/brfootball" target="_blank" rel="noopener noreferrer"><FaTwitter size={18} /></a>
+              <a className="me-2 text-secondary" href="https://plus.google.com/discover/wz4saB" target="_blank" rel="noopener noreferrer"><FaGoogle size={18} /></a>
+              <a className="text-secondary" href="https://www.instagram.com/bleacherreport/?hl=en" target="_blank" rel="noopener noreferrer"><FaInstagram size={18} /></a>
+            </div>
+          </Col>
+        </Row>
+      </Container>
+    </footer>
+  );
 }
+
 export default FooterPagePro;

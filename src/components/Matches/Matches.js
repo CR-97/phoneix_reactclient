@@ -1,31 +1,20 @@
+import React from 'react';
+import { Container } from 'reactstrap';
 import MatchContent from './MatchesItems';
-import React, { Component } from 'react';
 
-import {
-  Container, Row, Col
-} from 'reactstrap';
-
-
-const Matches = props =>{
-  const match = props.item;
-  let res;
-
-  if(match.length>0){
-    res = match.map((res) => 
-    <MatchContent item={res}/>
-    );
-  }
-
-  return(
+function Matches({ item = [] }) {
+  return (
     <div>
-       <Container>
-        <h1 className="page-title">Today's Matches</h1>
+      <Container>
+        <h1 className="page-title">Today&#39;s Matches</h1>
       </Container>
       <Container>
-        {res}
+        {item.map((match, i) => (
+          <MatchContent key={match.id || i} item={match} />
+        ))}
       </Container>
     </div>
   );
-};
+}
 
 export default Matches;

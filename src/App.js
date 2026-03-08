@@ -1,17 +1,11 @@
-import React, {
-  Component
-} from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import axios from 'axios';
 
-//Auth Pages
 import Login from './components/Auth/Login';
 import Register from './components/Auth/Register';
-
 import AppNavBar from './components/NavBar/NavBar';
 import AppFooter from './components/Footer';
-
 import Home from './components/Home/Home';
 import Match from './components/Matches/Matches';
 import Profile from './components/Profile/Saved';
@@ -20,142 +14,57 @@ import Team from './components/Team/Team';
 import Standing from './components/Standing/Standing';
 import Scorer from './components/Scorer/Scorer';
 
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
+const API = 'https://guarded-depths-49314.herokuapp.com';
 
-class App extends Component {
-  constructor(){
-    super();
-    this.state={
-      news:[],
-      news2:[],
-      news3:[],
-      matches:[],
-      comp:[],
-    };
-  }
-  
-   /*----------API GET Call-----------------*/
-   componentDidMount() {
-    this.getNews1();
-    this.getNews2();
-    this.getNews3();
-    this.getMatches();
-    this.getComp();
-  }
-    
-  componentWillUpdate(){
-    this.getNews1();
-    this.getNews2();
-    this.getNews3();
-  }
+function App() {
+  const [news1, setNews1] = useState([]);
+  const [news2, setNews2] = useState([]);
+  const [news3, setNews3] = useState([]);
+  const [matches, setMatches] = useState([]);
 
-  /*----------End of API GET Call-------------*/
-  getNews1 =() =>{
+  useEffect(() => {
+    axios.get(`${API}/getNews1`).then(r => setNews1(r.data.articles || [])).catch(() => {});
+    axios.get(`${API}/getNews2`).then(r => setNews2(r.data.articles || [])).catch(() => {});
+    axios.get(`${API}/getNews3`).then(r => setNews3(r.data.articles || [])).catch(() => {});
+    axios.get(`${API}/getMatches`).then(r => setMatches(r.data.matches || [])).catch(() => {});
+  }, []);
+
+  function handleSubmit(newsData) {
     axios
-    .get("https://guarded-depths-49314.herokuapp.com/getNews1") 
-      .then(response =>{
-        this.setState({
-          news1:response.data.articles
-        });
-      })
-      .catch(error => {
-        //alert(error);
-      });
+      .post(`${API}/getSaveNews/add`, newsData)
+      .then(() => alert('Saved'))
+      .catch(err => alert(err));
   }
 
-  getNews2 =() =>{
-    axios
-    .get("https://guarded-depths-49314.herokuapp.com/getNews2") 
-      .then(response =>{
-        this.setState({
-          news2:response.data.articles
-        });
-      })
-      .catch(error => {
-        //alert(error);
-      });
-  }
-
-  getNews3 =() =>{
-    axios
-    .get("https://guarded-depths-49314.herokuapp.com/getNews3") 
-      .then(response =>{
-        this.setState({
-          news3:response.data.articles
-        });
-      })
-      .catch(error => {
-        //alert(error);
-      });
-  }
-
-  getMatches =() =>{
-    axios
-      .get("https://guarded-depths-49314.herokuapp.com/getMatches") 
-        .then(response =>{
-          this.setState({
-            matches:response.data.matches
-          });
-        })
-        .catch(error => {
-          alert(error);
-        });
-
-  }
-
-  getComp =() =>{
-    axios
-      .get
-      ('https://guarded-depths-49314.herokuapp.com/getComp') 
-      .then(response =>{
-        this.setState({
-          comp:response.data
-        });
-      })
-      .catch(error => {
-        //alert(error);
-      });
-  }
-
- 
-    handleSubmit(newsData){
-      console.log(newsData);
-      axios.post("https://guarded-depths-49314.herokuapp.com/getSaveNews/add", newsData)
-      .then(res =>{
-        alert("Saved");
-      })
-      .catch(err =>{
-        alert(err);
-      });
-    }
-
-  render() {
-    return (
-      <Router>
-        <div id="page">
-        {/* Auth Parts */}
-        <AppNavBar/>
-
-        <Route path="/register" component={Register} />
-        <Route path="/login" component={Login} />
-        
-         
-        <Route exact path="/" render={() =><Home item={this.state.news} item2={this.state.news2} item3={this.state.news3} onClick={this.handleSubmit}/>}/>
-        
-        <Route path="/matches" render={() =><Match item={this.state.matches}/>} />
-
-        <Route path="/search" component={Search} />
-        <Route path="/team" component={Team} />
-        <Route path="/standings" component={Standing} />
-        <Route path="/scorer" component={Scorer}/>
-
-        <Route path="/profile" component={Profile} />
-      
-        <AppFooter/>
+  return (
+    <Router>
+      <div id="page">
+        <AppNavBar />
+        <Routes>
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route
+            path="/"
+            element={
+              <Home
+                item={news1}
+                item2={news2}
+                item3={news3}
+                onClick={handleSubmit}
+              />
+            }
+          />
+          <Route path="/matches" element={<Match item={matches} />} />
+          <Route path="/search" element={<Search />} />
+          <Route path="/team" element={<Team />} />
+          <Route path="/standings" element={<Standing />} />
+          <Route path="/scorer" element={<Scorer />} />
+          <Route path="/profile" element={<Profile />} />
+        </Routes>
+        <AppFooter />
       </div>
     </Router>
-    );
-  }
+  );
 }
+
 export default App;

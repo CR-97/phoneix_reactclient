@@ -1,39 +1,41 @@
-import React, { Component } from 'react';
-import {
-  Col,Card, CardImg, CardText, CardBody,
-  CardTitle, CardSubtitle, CardFooter
-} from 'reactstrap';
-import {
-  Fa,Button,CardImage
-} from 'mdbreact';
+import React from 'react';
+import { Col, Card, CardImg, CardText, CardBody, CardTitle, CardFooter } from 'reactstrap';
+import { FaStar } from 'react-icons/fa';
 
-const T5 = props =>{
-  function handleLike(){
-    props.onClick({
-      name:props.item.name,
-      crest: props.item.crest,
-      site: props.item.site,
-      stadium: props.item.stadium
-    });
-  }
+function T5({ item, onClick }) {
+  const handleLike = () => {
+    onClick({ name: item.name, crest: item.crest, site: item.website, stadium: item.venue });
+  };
 
-  return(
+  return (
     <Col sm="3">
       <Card id="team-size">
-        <CardImage id="img-size" top src={props.item.crest} overlay="white-slight" hover waves alt={props.item.name}/>
+        <CardImg
+          top
+          src={item.crest}
+          alt={item.name}
+          style={{ height: '120px', objectFit: 'contain', padding: '10px' }}
+        />
         <CardBody>
-          <CardTitle>{props.item.name}</CardTitle>
+          <CardTitle tag="h6">{item.name}</CardTitle>
           <hr />
-          <CardText>Stadium : {props.item.stadium}</CardText>
-          <CardText>Website : <a href={props.item.site} target="_blank">{props.item.site}</a> </CardText>
+          <CardText>Stadium: {item.venue}</CardText>
+          <CardText>
+            Website:{' '}
+            <a href={item.website} target="_blank" rel="noopener noreferrer">
+              {item.website}
+            </a>
+          </CardText>
         </CardBody>
         <CardFooter>
-          <Button className="btn-circle btn-lg " id="btn-star" onClick={handleLike}><Fa className="fa-xs" icon="star"/></Button>
+          <button className="btn btn-circle btn-lg" id="btn-star" onClick={handleLike}>
+            <FaStar />
+          </button>
         </CardFooter>
       </Card>
-    <br/>
-  </Col>
+      <br />
+    </Col>
   );
-};
+}
 
 export default T5;
