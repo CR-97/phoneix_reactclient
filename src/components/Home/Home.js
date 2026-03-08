@@ -35,14 +35,15 @@ const Home = props =>{
   }
 
   const loginRegLink = (
-    <div className="container">
-        <div className="jumbotron mt-5">
-            <div className="col-sm-8 mx-auto">
-              <h1 className="text-center">WELCOME TO PHONEIX FOOTBALL</h1>
-              <h3 className="text-center">Please register or login to view more contents</h3>
-            </div>
-        </div>
-    </div> 
+    <div className="hero-jumbotron">
+      <h1>WELCOME TO PHONEIX FOOTBALL</h1>
+      <p>Your ultimate football companion – news, standings, scores and more.</p>
+      <h3>Please register or login to explore all features</h3>
+      <div className="hero-actions">
+        <a href="/login" className="btn btn-light">Sign In</a>
+        <a href="/register" className="btn btn-outline-light">Register</a>
+      </div>
+    </div>
     
   )
 
@@ -52,7 +53,7 @@ const Home = props =>{
       {localStorage.usertoken ? Landing : loginRegLink}
       </Container>
        <Container>
-        <h1>Top Headlines</h1>
+        <h1 className="page-title">Top Headlines</h1>
       </Container>
       <Container>
         <Row>

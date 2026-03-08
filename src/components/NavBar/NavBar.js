@@ -107,12 +107,12 @@ class AppNavbar extends Component{
 
      return (
       <div>
-        <Navbar id="navbar"expand="sm" className="mb-5">
+        <Navbar id="navbar" expand="md" className="mb-4">
           <Container>
-            <img src={Logo} id="logo"/>
-            <NavbarBrand id="navtitle" href="/home">Phoneix Football</NavbarBrand>
-            <NavbarToggler onClick={this.toggle} />
-            <Collapse isOpen={this.state.open} navbar>
+            <img src={Logo} id="logo" alt="Phoneix Football Logo"/>
+            <NavbarBrand id="navtitle" href="/">Phoneix Football</NavbarBrand>
+            <NavbarToggler onClick={this.toggle} style={{borderColor:'rgba(255,255,255,0.5)'}}/>
+            <Collapse isOpen={this.state.isOpen} navbar>
               {localStorage.usertoken ? userLink : loginRegLink}
             </Collapse>
           </Container>

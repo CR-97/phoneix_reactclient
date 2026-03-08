@@ -24,12 +24,9 @@ class Landing extends Component {
 
     render () {
         return (
-            <div className="container">
-                <div className="jumbotron mt-5">
-                    <div className="col-sm-8 mx-auto">
-                         <h1 className="text-center">Welcome Back {this.state.first_name} {this.state.last_name}</h1>
-                    </div>
-                </div>
+            <div className="hero-jumbotron">
+                <h1>Welcome Back, {this.state.first_name} {this.state.last_name}! ⚽</h1>
+                <p>Stay updated with the latest football news, standings, and match results.</p>
             </div>
         )
     }

@@ -1,107 +1,515 @@
-#page{
-  background-color: rgb(233, 231, 231);
+/* ===== Global Styles ===== */
+* {
+  box-sizing: border-box;
 }
 
-#navbar{
-  background-color:  rgb(69, 82, 110) ;
-  color: white;
-}
-
-#navitem{
-  font-size: 17px;
-  color: white;
-}
-
-#navtitle{
-  font-size: 30px;
-  color:white;
+body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
 }
 
-#team-size{
-  height:400px;
+#page {
+  background-color: #f0f2f5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-#img-size{
-  height: 100px;
-  width: 200px;
-  margin-top: 10px;
-  margin-left: 30px;
+/* ===== NavBar ===== */
+#navbar {
+  background: linear-gradient(135deg, rgb(44, 56, 85) 0%, rgb(69, 82, 110) 100%);
+  color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  padding: 0.4rem 1rem;
 }
 
-#size{
-  height: 800px;
-  border-color: rgb(69, 82, 110);
-}
-#save-size{
-  height: 600px;
-  border-color:  rgb(69, 82, 110);
-}
-
-#logo{
-  height:75px;
-  width: 90px;
-  margin-right:7px;
-  border-radius: 38px;
-  border-color: black;
-
+#navitem {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.9) !important;
+  padding: 0.5rem 0.9rem;
+  border-radius: 4px;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-#score-size{
-  margin-top: 5px;
-  font-size: 16px;
-  color: darkgrey;
+#navitem:hover {
+  color: #fff !important;
+  background-color: rgba(255, 255, 255, 0.15);
 }
 
-#score-text{
-  margin-top: 10px;
-  font-size: 20px;
+#navtitle {
+  font-size: 26px;
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 700;
+  letter-spacing: 1px;
 }
 
-#score-title{
-  font-size: 25px;
-  font-style: italic;
+#logo {
+  height: 60px;
+  width: 72px;
+  margin-right: 10px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  object-fit: cover;
+  transition: transform 0.2s ease;
 }
 
-#subtitle{
-  margin-top: 20px;
-  margin-bottom: 20px
+#logo:hover {
+  transform: scale(1.05);
 }
 
-#read-more{
-  margin-top: 25px;
+/* ===== Page Section Headers ===== */
+.section-header {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: rgb(44, 56, 85);
+  padding-bottom: 0.4rem;
+  border-bottom: 3px solid rgb(69, 82, 110);
+  margin-bottom: 1.5rem;
+  display: inline-block;
 }
 
-#btn-prime { background: rgb(197, 20, 20) !important; }
-
-#btn-save { background: rgb(19, 185, 149) !important; }
-
-#btn-star { 
-  background: rgba(243, 247, 48, 0.986) !important; 
-  padding: 15px;
-  margin-left: 75px;
+/* ===== Hero / Jumbotron ===== */
+.hero-jumbotron {
+  background: linear-gradient(135deg, rgb(44, 56, 85) 0%, rgb(69, 82, 110) 60%, rgb(100, 120, 160) 100%);
+  color: white;
+  border-radius: 12px;
+  padding: 3rem 2rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 6px 20px rgba(69, 82, 110, 0.4);
+  text-align: center;
 }
 
-#btn-del { 
-  background: rgb(197, 20, 20) !important; 
-  padding: 15px;
-  margin-left: 75px;
+.hero-jumbotron h1 {
+  font-size: 2.4rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.hero-jumbotron h3,
+.hero-jumbotron p {
+  font-size: 1.15rem;
+  opacity: 0.9;
+  margin-top: 0.75rem;
+}
+
+.hero-jumbotron .hero-actions {
+  margin-top: 1.5rem;
+}
+
+.hero-jumbotron .hero-actions a {
+  margin: 0.4rem;
+  padding: 0.6rem 1.6rem;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: inline-block;
+}
+
+.hero-jumbotron .hero-actions a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+/* ===== News / Home Cards ===== */
+#size {
+  height: auto;
+  min-height: 480px;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.12);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+#size:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
+}
+
+#size .card-img-top,
+#size img {
+  height: 200px;
+  object-fit: cover;
+}
+
+#size .card-body {
+  flex: 1;
+}
+
+#size .card-footer {
+  background: #fafafa;
+  border-top: 1px solid #eee;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+}
+
+#subtitle {
+  margin-top: 0.5rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.9rem;
+  color: #666;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+#read-more {
+  margin-top: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: rgb(69, 82, 110) !important;
+  transition: color 0.2s ease;
+}
+
+#read-more:hover {
+  color: rgb(197, 20, 20) !important;
+}
+
+/* ===== Saved Items Card ===== */
+#save-size {
+  height: auto;
+  min-height: 380px;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.12);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  overflow: hidden;
+}
+
+#save-size:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.16);
+}
+
+/* ===== Team Card ===== */
+#team-size {
+  height: auto;
+  min-height: 320px;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.12);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  overflow: hidden;
+}
+
+#team-size:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.16);
+}
+
+#img-size {
+  height: 120px;
+  width: auto;
+  max-width: 180px;
+  margin: 15px auto 5px;
+  display: block;
+  object-fit: contain;
+}
+
+/* ===== Match Cards ===== */
+.match-card {
+  border: none !important;
+  border-radius: 10px !important;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1) !important;
+  margin-bottom: 1rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.match-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15) !important;
+}
+
+#score-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: rgb(44, 56, 85);
+  font-style: normal;
+  letter-spacing: 0.5px;
+}
+
+#score-text, #scroe-text {
+  margin-top: 0.5rem;
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: #444;
+}
+
+#score-size {
+  margin-top: 0.4rem;
+  font-size: 0.95rem;
+  color: #888;
+}
+
+/* ===== Buttons ===== */
+#btn-prime {
+  background: linear-gradient(135deg, rgb(197, 20, 20), rgb(230, 60, 60)) !important;
+  border: none !important;
+  box-shadow: 0 3px 8px rgba(197, 20, 20, 0.4);
+  transition: transform 0.15s ease, box-shadow 0.15s ease !important;
+}
+
+#btn-prime:hover {
+  transform: scale(1.08);
+  box-shadow: 0 5px 14px rgba(197, 20, 20, 0.5) !important;
+}
+
+#btn-save {
+  background: linear-gradient(135deg, rgb(19, 185, 149), rgb(10, 210, 165)) !important;
+  border: none !important;
+  box-shadow: 0 3px 8px rgba(19, 185, 149, 0.4);
+  transition: transform 0.15s ease, box-shadow 0.15s ease !important;
+}
+
+#btn-save:hover {
+  transform: scale(1.08);
+  box-shadow: 0 5px 14px rgba(19, 185, 149, 0.5) !important;
+}
+
+#btn-star {
+  background: linear-gradient(135deg, rgb(243, 196, 48), rgb(255, 215, 0)) !important;
+  border: none !important;
+  padding: 12px 20px;
+  margin-left: 0;
+  box-shadow: 0 3px 8px rgba(243, 196, 48, 0.4);
+  transition: transform 0.15s ease !important;
+}
+
+#btn-star:hover {
+  transform: scale(1.08);
+}
+
+#btn-del {
+  background: linear-gradient(135deg, rgb(197, 20, 20), rgb(230, 60, 60)) !important;
+  border: none !important;
+  padding: 12px 20px;
+  margin-left: 0;
+  box-shadow: 0 3px 8px rgba(197, 20, 20, 0.4);
+  transition: transform 0.15s ease !important;
+}
+
+#btn-del:hover {
+  transform: scale(1.08);
 }
 
 .btn-circle.btn-lg {
-  width: 50px;
-  height: 50px;
-  padding: 14px 16px;
-  font-size: 18px;
+  width: 48px;
+  height: 48px;
+  padding: 12px 14px;
+  font-size: 16px;
   line-height: 1.33;
-  border-radius: 25px;
+  border-radius: 50%;
 }
 
 .btn-circle.btn-xl {
-  width: 70px;
-  height: 70px;
-  padding: 10px 16px;
-  font-size: 24px;
+  width: 52px;
+  height: 52px;
+  padding: 12px 14px;
+  font-size: 20px;
   line-height: 1.33;
-  border-radius: 35px;
+  border-radius: 50%;
+}
+
+/* ===== Auth Forms ===== */
+.auth-card {
+  border: none;
+  border-radius: 14px;
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.12);
+  padding: 2.5rem 2rem;
+  background: #fff;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.auth-card h1 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: rgb(44, 56, 85);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.auth-card .form-control {
+  border-radius: 8px;
+  border: 1px solid #dde;
+  padding: 0.65rem 1rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.auth-card .form-control:focus {
+  border-color: rgb(69, 82, 110);
+  box-shadow: 0 0 0 0.2rem rgba(69, 82, 110, 0.2);
+}
+
+.auth-card .btn-primary {
+  background: linear-gradient(135deg, rgb(44, 56, 85), rgb(69, 82, 110)) !important;
+  border: none !important;
+  border-radius: 8px;
+  padding: 0.7rem;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.auth-card .btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(44, 56, 85, 0.4) !important;
+}
+
+/* ===== Search Page ===== */
+.search-jumbotron {
+  background: linear-gradient(135deg, rgb(44, 56, 85), rgb(69, 82, 110));
+  color: white;
+  border-radius: 12px;
+  padding: 2rem 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 15px rgba(69, 82, 110, 0.35);
+}
+
+.search-jumbotron h1 {
+  font-weight: 700;
+  font-size: 2rem;
+}
+
+.search-jumbotron p {
+  opacity: 0.9;
+}
+
+.search-card {
+  border: none !important;
+  border-radius: 8px !important;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1) !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  margin-bottom: 0.5rem;
+}
+
+.search-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15) !important;
+}
+
+.search-card a {
+  color: rgb(44, 56, 85);
+  text-decoration: none;
+}
+
+.search-card a:hover {
+  color: rgb(197, 20, 20);
+}
+
+/* ===== Profile Page ===== */
+.profile-jumbotron {
+  background: linear-gradient(135deg, rgb(44, 56, 85), rgb(69, 82, 110));
+  color: white;
+  border-radius: 12px;
+  padding: 2.5rem 2rem;
+  margin-top: 1.5rem;
+  box-shadow: 0 6px 20px rgba(69, 82, 110, 0.4);
+}
+
+.profile-jumbotron h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-align: center;
+}
+
+.profile-jumbotron .table {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  overflow: hidden;
+  color: white;
+  margin-top: 1rem;
+}
+
+.profile-jumbotron .table td {
+  border-color: rgba(255, 255, 255, 0.2);
+  padding: 0.75rem 1rem;
+}
+
+/* ===== Standing / Tabs ===== */
+.nav-tabs .nav-link {
+  color: rgb(69, 82, 110);
+  font-weight: 500;
+  border-radius: 6px 6px 0 0;
+  transition: background-color 0.2s ease;
+}
+
+.nav-tabs .nav-link:hover {
+  background-color: rgba(69, 82, 110, 0.1);
+}
+
+.nav-tabs .nav-link.active {
+  color: white !important;
+  background-color: rgb(69, 82, 110) !important;
+  border-color: rgb(69, 82, 110) !important;
+}
+
+.standing-table thead tr {
+  background: rgb(44, 56, 85);
+  color: white;
+}
+
+.standing-table thead tr th,
+.standing-table thead tr td {
+  font-weight: 600;
+  border: none;
+  padding: 0.75rem 0.9rem;
+}
+
+.standing-table tbody tr {
+  transition: background-color 0.15s ease;
+}
+
+.standing-table tbody tr:hover {
+  background-color: rgba(69, 82, 110, 0.08);
+}
+
+/* ===== Footer ===== */
+.page-footer {
+  background: linear-gradient(135deg, rgb(33, 43, 65) 0%, rgb(44, 56, 85) 100%) !important;
+  margin-top: auto;
+}
+
+.page-footer a {
+  transition: color 0.2s ease;
+}
+
+.page-footer a:hover {
+  color: rgb(19, 185, 149) !important;
+}
+
+/* ===== Utility ===== */
+.content-section {
+  padding: 1.5rem 0;
+}
+
+.page-title {
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: rgb(44, 56, 85);
+  margin-bottom: 1.2rem;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.page-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50px;
+  height: 3px;
+  background: linear-gradient(90deg, rgb(69, 82, 110), rgb(19, 185, 149));
+  border-radius: 2px;
 }

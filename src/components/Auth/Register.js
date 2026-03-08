@@ -45,10 +45,10 @@ class Register extends Component {
     render () {
         return (
             <div className="container">
-                <div className="row">
-                    <div className="col-md-6 mt-5 mx-auto">
+                <div className="row justify-content-center">
+                    <div className="col-md-5 auth-card">
+                        <h1>Create Account</h1>
                         <form noValidate onSubmit={this.onSubmit}>
-                            <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
                             <div className="form-group">
                                 <label htmlFor="first_name">First Name</label>
                                 <input type="text"
@@ -89,13 +89,16 @@ class Register extends Component {
                                     value={this.state.password}
                                     onChange={this.onChange} />
                             </div>
-                            <button type="submit" className="btn btn-lg btn-primary btn-block">
+                            <button type="submit" className="btn btn-lg btn-primary btn-block mt-3">
                                 Register
                             </button>
+                            <p className="text-center mt-3" style={{color:'#888', fontSize:'0.9rem'}}>
+                                Already have an account? <a href="/login" style={{color:'rgb(69,82,110)', fontWeight:'600'}}>Sign In</a>
+                            </p>
                         </form>
                     </div>
                 </div>
-                <br/><br/>
+                <br/>
             </div>
             
         )

@@ -110,38 +110,36 @@ export default class Saved extends Component{
     return(
       <div>
         <Container>
-                <div className="jumbotron mt-5">
-                    <div className="col-sm-8 mx-auto">
-                        <h1 className="text-center">PROFILE</h1>
-                    </div>
-                    <table className="table col-md-6 mx-auto">
-                        <tbody>
-                            <tr>
-                                <td>First Name</td>
-                                <td>{this.state.first_name}</td>
-                            </tr>
-                            <tr>
-                                <td>Last Name</td>
-                                <td>{this.state.last_name}</td>
-                            </tr>
-                            <tr>
-                                <td>Email</td>
-                                <td>{this.state.email}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+          <div className="profile-jumbotron">
+            <h1>MY PROFILE</h1>
+            <table className="table col-md-6 mx-auto">
+              <tbody>
+                <tr>
+                  <td><strong>First Name</strong></td>
+                  <td>{this.state.first_name}</td>
+                </tr>
+                <tr>
+                  <td><strong>Last Name</strong></td>
+                  <td>{this.state.last_name}</td>
+                </tr>
+                <tr>
+                  <td><strong>Email</strong></td>
+                  <td>{this.state.email}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </Container>
-        <Container>
-          <h1>Saved Teams</h1>
+        <Container className="content-section">
+          <h1 className="page-title">Saved Teams</h1>
         </Container>
         <Container>
           <Row>
           {team}
           </Row>
         </Container>
-        <Container>
-          <h1>Saved Headlines</h1>
+        <Container className="content-section">
+          <h1 className="page-title">Saved Headlines</h1>
         </Container>
         <Container>
           <Row>

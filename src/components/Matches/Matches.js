@@ -19,7 +19,7 @@ const Matches = props =>{
   return(
     <div>
        <Container>
-        <h1>Today Matches</h1>
+        <h1 className="page-title">Today's Matches</h1>
       </Container>
       <Container>
         {res}

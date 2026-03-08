@@ -147,8 +147,7 @@ export default class Standing extends Component {
     return (
       <div>
         <Container>
-          <h1>Standing</h1>
-          <br/>
+          <h1 className="page-title">Standings</h1>
         </Container>
         <Container>
         <Nav tabs>
@@ -156,6 +155,7 @@ export default class Standing extends Component {
             <NavLink
               className={classnames({ active: this.state.activeTab === '1' })}
               onClick={() => { this.toggle('1'); }}
+              style={{cursor:'pointer'}}
             >
               BundesLiga
             </NavLink>
@@ -164,6 +164,7 @@ export default class Standing extends Component {
             <NavLink
               className={classnames({ active: this.state.activeTab === '2' })}
               onClick={() => { this.toggle('2'); }}
+              style={{cursor:'pointer'}}
             >
               LaLiga
             </NavLink>
@@ -172,6 +173,7 @@ export default class Standing extends Component {
             <NavLink
               className={classnames({ active: this.state.activeTab === '3' })}
               onClick={() => { this.toggle('3'); }}
+              style={{cursor:'pointer'}}
             >
               Ligue 1
             </NavLink>
@@ -180,6 +182,7 @@ export default class Standing extends Component {
             <NavLink
               className={classnames({ active: this.state.activeTab === '4' })}
               onClick={() => { this.toggle('4'); }}
+              style={{cursor:'pointer'}}
             >
               Premier League
             </NavLink>
@@ -188,8 +191,9 @@ export default class Standing extends Component {
             <NavLink
               className={classnames({ active: this.state.activeTab === '5' })}
               onClick={() => { this.toggle('5'); }}
+              style={{cursor:'pointer'}}
             >
-              Series A
+              Serie A
             </NavLink>
           </NavItem>
          
@@ -201,7 +205,7 @@ export default class Standing extends Component {
         <TabContent activeTab={this.state.activeTab}>
           <TabPane tabId="1">
             <Container>
-            <Table>
+            <Table className="standing-table" bordered hover responsive>
               <thead>
               <tr>
                 <td>Pos</td>
@@ -225,7 +229,7 @@ export default class Standing extends Component {
 
           <TabPane tabId="2">
           <Container>
-            <Table>
+            <Table className="standing-table" bordered hover responsive>
               <thead>
               <tr>
                 <td>Pos</td>
@@ -249,7 +253,7 @@ export default class Standing extends Component {
 
           <TabPane tabId="3">
           <Container>
-            <Table>
+            <Table className="standing-table" bordered hover responsive>
               <thead>
               <tr>
                 <td>Pos</td>
@@ -274,7 +278,7 @@ export default class Standing extends Component {
 
           <TabPane tabId="4">
           <Container>
-            <Table>
+            <Table className="standing-table" bordered hover responsive>
               <thead>
               <tr>
                 <td>Pos</td>
@@ -299,7 +303,7 @@ export default class Standing extends Component {
 
           <TabPane tabId="5">
           <Container>
-            <Table>
+            <Table className="standing-table" bordered hover responsive>
               <thead>
               <tr>
                 <td>Pos</td>
