@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import {
   Collapse,
   Navbar,
@@ -11,115 +11,90 @@ import {
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
-  DropdownItem 
+  DropdownItem,
 } from 'reactstrap';
-import { withRouter } from 'react-router-dom'
-
+import { useNavigate, Link } from 'react-router-dom';
 import Logo from './logo.png';
 
+function AppNavbar() {
+  const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
-class AppNavbar extends Component{
-  constructor(){
-    super();
+  const toggle = () => setIsOpen(prev => !prev);
 
-    this.toggle = this.toggle.bind(this);
-    this.logout = this.logout.bind(this);
-    this.state={
-      isOpen: false
-    };
-  }
-  
-  toggle = () => {
-    this.setState({
-      isOpen: !this.state.isOpen
-    });
-  }
-
-  logout(e) {
+  const logout = e => {
     e.preventDefault();
-        localStorage.removeItem('usertoken');
-        this.props.history.push(`/`);
-  }
+    localStorage.removeItem('usertoken');
+    navigate('/');
+  };
 
-  
-  render(){
-    const loginRegLink = (
-      
-            <Nav className="ml-auto" navbar>
-              <NavItem>
-                <NavLink id="navitem" href="/login" to="/login">
-                  Login
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink id="navitem" href="/register" to="/register">
-                  Register
-                </NavLink>
-              </NavItem>
-            </Nav>
+  const loginRegLink = (
+    <Nav className="ms-auto" navbar>
+      <NavItem>
+        <NavLink id="navitem" tag={Link} to="/login">
+          Login
+        </NavLink>
+      </NavItem>
+      <NavItem>
+        <NavLink id="navitem" tag={Link} to="/register">
+          Register
+        </NavLink>
+      </NavItem>
+    </Nav>
+  );
 
+  const userLink = (
+    <Nav className="ms-auto" navbar>
+      <NavItem>
+        <NavLink id="navitem" tag={Link} to="/">
+          Home
+        </NavLink>
+      </NavItem>
+      <NavItem>
+        <NavLink id="navitem" tag={Link} to="/search">
+          Search
+        </NavLink>
+      </NavItem>
+      <UncontrolledDropdown nav inNavbar>
+        <DropdownToggle id="navitem" nav caret>
+          Competitions
+        </DropdownToggle>
+        <DropdownMenu end>
+          <DropdownItem tag={Link} to="/team">Teams</DropdownItem>
+          <DropdownItem tag={Link} to="/standings">Standings</DropdownItem>
+          <DropdownItem tag={Link} to="/scorer">Top Scorers</DropdownItem>
+          <DropdownItem tag={Link} to="/matches">Matches</DropdownItem>
+        </DropdownMenu>
+      </UncontrolledDropdown>
+      <NavItem>
+        <NavLink id="navitem" tag={Link} to="/profile">
+          Profile
+        </NavLink>
+      </NavItem>
+      <NavItem>
+        <NavLink id="navitem" href="#" onClick={logout}>
+          Logout
+        </NavLink>
+      </NavItem>
+    </Nav>
+  );
 
-    )
-
-    const userLink = (
-              <Nav className="ml-auto" navbar>
-                <NavItem>
-                  <NavLink id="navitem" href="/" to="/">
-                    Home
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink id="navitem" href="/search" to="/search">
-                    Search
-                  </NavLink>
-                </NavItem>
-                <UncontrolledDropdown nav inNavbar>
-                <DropdownToggle id="navitem" nav caret>
-                  Competitions
-                </DropdownToggle>
-                <DropdownMenu right>
-                  <DropdownItem href="/team">
-                    Teams
-                  </DropdownItem>
-                  <DropdownItem href="/standings">
-                    Standings
-                  </DropdownItem>
-                  <DropdownItem href="/scorer">
-                    Top Scorers
-                  </DropdownItem>
-                  <DropdownItem href="/matches">
-                    Matches
-                  </DropdownItem>
-                </DropdownMenu>
-              </UncontrolledDropdown>
-                <NavItem>
-                  <NavLink id="navitem" href="/profile" to="/profile">
-                    Profile
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink id="navitem" href="" onClick={this.logout}>
-                    Logout
-                  </NavLink>
-                </NavItem>
-              </Nav>
-     )
-
-     return (
-      <div>
-        <Navbar id="navbar"expand="sm" className="mb-5">
-          <Container>
-            <img src={Logo} id="logo"/>
-            <NavbarBrand id="navtitle" href="/home">Phoneix Football</NavbarBrand>
-            <NavbarToggler onClick={this.toggle} />
-            <Collapse isOpen={this.state.open} navbar>
-              {localStorage.usertoken ? userLink : loginRegLink}
-            </Collapse>
-          </Container>
-        </Navbar>
-      </div>
-    );
-  } 
+  return (
+    <div>
+      <Navbar id="navbar" expand="md" className="mb-4">
+        <Container>
+          <img src={Logo} id="logo" alt="Phoneix Football Logo" />
+          <NavbarBrand id="navtitle" tag={Link} to="/">
+            Phoneix Football
+          </NavbarBrand>
+          <NavbarToggler onClick={toggle} style={{ borderColor: 'rgba(255,255,255,0.5)' }} />
+          <Collapse isOpen={isOpen} navbar>
+            {localStorage.usertoken ? userLink : loginRegLink}
+          </Collapse>
+        </Container>
+      </Navbar>
+    </div>
+  );
 }
 
-export default withRouter(AppNavbar);
+export default AppNavbar;

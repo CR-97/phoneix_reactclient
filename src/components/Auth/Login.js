@@ -1,80 +1,66 @@
-import React, { Component } from 'react'
-import { login } from './UserFunctions'
+import React, { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { login } from './UserFunctions';
 
-class Login extends Component {
-    constructor() {
-        super()
-        this.state = {
-            email: '',
-            password: '',
-        }
-        this.onChange = this.onChange.bind(this)
-        this.onSubmit = this.onSubmit.bind(this)
+function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+
+  const onSubmit = e => {
+    e.preventDefault();
+    if (!email || !password) {
+      alert('Please Enter Email and Password');
+      return;
     }
+    login({ email, password }).then(res => {
+      if (res) navigate('/');
+    });
+  };
 
-    onChange (e) {
-        this.setState({ [e.target.name]: e.target.value })
-    }
-
-    onSubmit (e) {
-        e.preventDefault()
-
-        const user = {
-            email: this.state.email,
-            password: this.state.password
-        }
-        if(document.getElementById("email").value == "" || 
-        document.getElementById("password").value == ""){
-            alert("Please Enter Email and Password")
-            return false
-        }else{
-            login(user).then(res => {
-                if (res) {
-                    this.props.history.push(`/`);
-                }
-            })
-        }
-
-        
-    }
-
-    render () {
-        return (
-            <div className="container">
-                <div className="row">
-                    <div className="col-md-6 mt-5 mx-auto">
-                        <form noValidate onSubmit={this.onSubmit}>
-                            <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
-                            <div className="form-group">
-                                <label htmlFor="email">Email Address</label>
-                                <input type="email"
-                                    className="form-control"
-                                    name="email"
-                                    id="email"
-                                    placeholder="Enter Email"
-                                    value={this.state.email}
-                                    onChange={this.onChange} />
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="password">Password</label>
-                                <input type="password"
-                                    className="form-control"
-                                    name="password"
-                                    id="password"
-                                    placeholder="Enter Password"
-                                    value={this.state.password}
-                                    onChange={this.onChange} />
-                            </div>
-                            <button type="submit" className="btn btn-lg btn-primary btn-block">
-                                Sign in
-                            </button>
-                        </form>
-                    </div>
-                </div>
-                <br/><br/>
+  return (
+    <div className="container">
+      <div className="row justify-content-center">
+        <div className="col-md-5 auth-card">
+          <h1>Sign In</h1>
+          <form noValidate onSubmit={onSubmit}>
+            <div className="form-group mb-3">
+              <label htmlFor="email">Email Address</label>
+              <input
+                type="email"
+                className="form-control"
+                id="email"
+                placeholder="Enter Email"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+              />
             </div>
-        )
-    }
+            <div className="form-group mb-3">
+              <label htmlFor="password">Password</label>
+              <input
+                type="password"
+                className="form-control"
+                id="password"
+                placeholder="Enter Password"
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+              />
+            </div>
+            <button type="submit" className="btn btn-lg btn-primary w-100 mt-2">
+              Sign In
+            </button>
+            <p className="text-center mt-3" style={{ color: '#888', fontSize: '0.9rem' }}>
+              Don&apos;t have an account?{' '}
+              <Link to="/register" style={{ color: 'rgb(69,82,110)', fontWeight: '600' }}>
+                Register
+              </Link>
+            </p>
+          </form>
+        </div>
+      </div>
+      <br />
+    </div>
+  );
 }
 
-export default Login
+export default Login;

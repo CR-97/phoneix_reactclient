@@ -1,33 +1,31 @@
-import React, { Component } from 'react';
-import {
-  Container, Row, Col,
-  Card, CardImg, CardText, CardBody,
-  CardTitle, CardSubtitle, CardFooter
-} from 'reactstrap';
-import {
-  Fa,CardImage,Button
-} from 'mdbreact';
-const MatchesItems = props =>{
+import React from 'react';
+import { Card, CardBody, CardTitle, CardSubtitle, CardText } from 'reactstrap';
 
-  // function handleSubmit(){
-  //   props.onClick({
-  //     title: props.item.title,
-  //   });
-  // }
-  
-    return(
-      <div>
-      <Card>
-          <CardBody>
-            <CardTitle id="score-title">{props.item.competition.name}</CardTitle>
-            <CardSubtitle id="scroe-text">{props.item.homeTeam.name} vs {props.item.awayTeam.name}</CardSubtitle>
-            <CardText id="score-size">Score : {props.item.score.fullTime.homeTeam} - {props.item.score.fullTime.awayTeam}</CardText>
-          </CardBody>
-        </Card>
-        <br/>
-      </div>
-    );
-};
+function MatchesItems({ item }) {
+  return (
+    <div>
+      <Card className="match-card">
+        <CardBody>
+          <div className="d-flex justify-content-between align-items-start">
+            <CardTitle tag="h5" id="score-title">{item.competition.name}</CardTitle>
+            <span style={{ fontSize: '0.8rem', color: '#888', marginTop: '3px' }}>{item.status}</span>
+          </div>
+          <CardSubtitle id="scroe-text" className="mb-2">
+            <span style={{ fontWeight: '700' }}>{item.homeTeam.name}</span>
+            <span style={{ margin: '0 10px', color: '#aaa' }}>vs</span>
+            <span style={{ fontWeight: '700' }}>{item.awayTeam.name}</span>
+          </CardSubtitle>
+          <CardText id="score-size">
+            Score:{' '}
+            <strong>
+              {item.score.fullTime.homeTeam} - {item.score.fullTime.awayTeam}
+            </strong>
+          </CardText>
+        </CardBody>
+      </Card>
+    </div>
+  );
+}
 
 export default MatchesItems;
 

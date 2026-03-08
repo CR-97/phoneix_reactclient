@@ -1,16 +1,13 @@
-import React, {Component} from 'react';
-import { Table, Container } from 'reactstrap';
+import React from 'react';
 
-
-const Table2 = props =>{
-  //console.log(scorer);
+function ScorerT2({ item }) {
   return (
-    <tr>     
-    <td>{props.item.player.name}</td>
-    <td>{props.item.team.name}</td>
-    <td>{props.item.numberOfGoals}</td>
-  </tr>
+    <tr>
+      <td>{item.player.name}</td>
+      <td>{item.team.name}</td>
+      <td>{item.numberOfGoals}</td>
+    </tr>
   );
+}
 
-};
-export default Table2;
+export default ScorerT2;

@@ -1,217 +1,69 @@
-import React, { Component } from 'react';
-import {
-  Container,Row
-} from 'reactstrap';
-
+import React, { useState, useEffect } from 'react';
+import { Container, Row } from 'reactstrap';
+import axios from 'axios';
 import T1 from './T1';
 import T2 from './T2';
 import T3 from './T3';
 import T4 from './T4';
 import T5 from './T5';
 import T6 from './T6';
-import axios from 'axios';
 
-export default class Team extends Component{
-  constructor(){
-    super();
-    this.state={
-      premier: [],
-      uefa: [],
-      ligue1: [],
-      bunde: [],
-      seriesA: [],
-      laliga: []
-    };
-  }
+const API = 'https://guarded-depths-49314.herokuapp.com';
 
-  componentDidMount(){
-    this.getUefa();
-    this.getBunde();
-    this.getLiga();
-    this.getPremier();
-    this.getSeries();
-    this.getLigue();
-  }
+function Team() {
+  const [teams, setTeams] = useState({ premier: [], uefa: [], ligue1: [], bunde: [], seriesA: [], laliga: [] });
 
-  getUefa = () =>{
+  useEffect(() => {
+    const endpoints = [
+      { key: 'uefa', code: 2001 },
+      { key: 'bunde', code: 2002 },
+      { key: 'laliga', code: 2014 },
+      { key: 'ligue1', code: 2015 },
+      { key: 'seriesA', code: 2019 },
+      { key: 'premier', code: 2021 },
+    ];
+    endpoints.forEach(({ key, code }) => {
+      axios
+        .get(`${API}/getTeam/${code}`)
+        .then(r => setTeams(prev => ({ ...prev, [key]: r.data })))
+        .catch(() => {});
+    });
+  }, []);
+
+  const handleLike = likeData => {
     axios
-    .get("https://guarded-depths-49314.herokuapp.com/getTeam/2001") 
-      .then(response =>{
-        this.setState({
-         uefa:response.data
-        });
-      })
-      .catch(error => {
-        //alert(error);
-      });
-  }
+      .post(`${API}/getSaveTeams/add`, likeData)
+      .then(() => alert('Saved'))
+      .catch(() => {});
+  };
 
-  getBunde = () =>{
-    axios
-    .get("https://guarded-depths-49314.herokuapp.com/getTeam/2002") 
-      .then(response =>{
-        this.setState({
-         bunde:response.data
-        });
-      })
-      .catch(error => {
-        //alert(error);
-      });
-  }
+  const sections = [
+    { label: 'European Championship', data: teams.uefa, Component: T1 },
+    { label: 'BundesLiga', data: teams.bunde, Component: T2 },
+    { label: 'La Liga', data: teams.laliga, Component: T3 },
+    { label: 'Ligue 1', data: teams.ligue1, Component: T4 },
+    { label: 'Premier League', data: teams.premier, Component: T5 },
+    { label: 'Serie A', data: teams.seriesA, Component: T6 },
+  ];
 
-  getLiga = () =>{
-    axios
-    .get("https://guarded-depths-49314.herokuapp.com/getTeam/2014") 
-      .then(response =>{
-        this.setState({
-         laliga:response.data
-        });
-      })
-      .catch(error => {
-        //alert(error);
-      });
-  }
-
-  getLigue = () =>{
-    axios
-    .get("https://guarded-depths-49314.herokuapp.com/getTeam/2015") 
-      .then(response =>{
-        this.setState({
-         ligue1:response.data
-        });
-      })
-      .catch(error => {
-        //alert(error);
-      });
-  }
-
-  getSeries = () =>{
-    axios
-    .get("https://guarded-depths-49314.herokuapp.com/getTeam/2019") 
-      .then(response =>{
-        this.setState({
-         seriesA:response.data
-        });
-      })
-      .catch(error => {
-        //alert(error);
-      });
-  }
-
-  getPremier = () =>{
-    axios
-    .get("https://guarded-depths-49314.herokuapp.com/getTeam/2021") 
-      .then(response =>{
-        this.setState({
-         premier:response.data
-        });
-      })
-      .catch(error => {
-        //alert(error);
-      });
-  }
-
-  handleLike =(likeData)=>{
-    console.log(likeData);
-      axios.post("https://guarded-depths-49314.herokuapp.com/getSaveTeams/add", likeData)
-      .then(res =>{
-        alert("Saved");
-      })
-      .catch(err =>{
-        //alert(err);
-      });
-  }
-
-
-  render(){
-    const uefa = this.state.uefa.map ((item)=>{
-      return(
-          <T1 item={item} onClick={this.handleLike}/>
-      );
-    })
-    const bunde = this.state.bunde.map ((item)=>{
-      return(
-          <T2 item={item} onClick={this.handleLike}/>
-      );
-    })
-
-    const liga = this.state.laliga.map ((item)=>{
-      return(
-          <T3 item={item} onClick={this.handleLike}/>
-      );
-    })
-
-    const ligue = this.state.ligue1.map ((item)=>{
-      return(
-          <T4 item={item} onClick={this.handleLike}/>
-      );
-    })
-
-    const pl = this.state.premier.map ((item)=>{
-      return(
-          <T5 item={item} onClick={this.handleLike}/>
-      );
-    })
-
-    const series = this.state.seriesA.map ((item)=>{
-      return(
-          <T6 item={item} onClick={this.handleLike}/>
-      );
-    })
-
-    return(
-      <div>
-         <Container>
-          <h1>Teams</h1>
-          <br/>
-        </Container>
-        <Container>
-          <h2>European ChampionShip</h2>
-          <br/>
+  return (
+    <div>
+      <Container>
+        <h1 className="page-title">Teams</h1>
+      </Container>
+      {sections.map(({ label, data, Component }) => (
+        <Container key={label}>
+          <h2 className="mt-4 mb-3" style={{ color: 'rgb(44,56,85)' }}>{label}</h2>
           <Row>
-          {uefa}
+            {data.map((item, i) => (
+              <Component key={item.id || i} item={item} onClick={handleLike} />
+            ))}
           </Row>
         </Container>
-        <Container>
-          <h2>BundesLiga</h2>
-          <br/>
-          <Row>
-          {bunde}
-          </Row>
-        </Container>
-        <Container>
-          <h2>La Liga</h2>
-          <br/>
-          <Row>
-          {liga}
-          </Row>
-        </Container>
-        <Container>
-          <h2>Ligue 1</h2>
-          <br/>
-          <Row>
-          {ligue}
-          </Row>
-        </Container>
-        <Container>
-          <h2>Premier League</h2>
-          <br/>
-          <Row>
-          {pl}
-          </Row>
-        </Container>
-        <Container>
-          <h2>Series A</h2>
-          <br/>
-          <Row>
-          {series}
-          </Row>
-        </Container>
-        <br/><br/>
-      </div>
-    );
-  }
- 
-
+      ))}
+      <br /><br />
+    </div>
+  );
 }
 
+export default Team;
